@@ -6,6 +6,7 @@ gem 'rails', '4.0.2'
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'devise'
+gem 'dotenv-rails'
 gem 'carrierwave'
 gem 'fog', '~>1.12.1'
 gem 'rails_12factor'
@@ -29,6 +30,34 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "guard-rspec"
+  gem "capybara"
+  gem "database_cleaner"
+  gem "selenium-webdriver"
+  gem "jasmine"
+  gem "pry-rails"
+  gem "pry-debugger"
+  gem "pry-stack_explorer"
+  gem "awesome_print"
+  gem 'guard-sass', require: false
+  gem 'guard-livereload', require: false
+  gem 'rails_layout'
+end
+
+group :development do
+  gem "annotate"
+  gem "quiet_assets"
+  gem "binding_of_caller"
+  gem "meta_request"
+  gem "rails-erd"
+  gem "better_errors"
+  gem "terminal-notifier-guard"
+end
+
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
