@@ -104,6 +104,9 @@ GEM
       nokogiri (~> 1.5.0)
       ruby-hmac
     formatador (0.2.4)
+    gon (5.0.4)
+      actionpack (>= 2.3.0)
+      json
     guard (2.5.1)
       formatador (>= 0.2.4)
       listen (~> 2.6)
@@ -293,6 +296,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   fog (~> 1.12.1)
+  gon
   guard-livereload
   guard-rspec
   guard-sass

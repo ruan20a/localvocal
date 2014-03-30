@@ -3,8 +3,10 @@
 <head>
   <title>Localvocal</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-no-turbolinks" => true %>
+  <script src="//connect.soundcloud.com/sdk.js"></script>
   <%= csrf_meta_tags %>
+  <%= include_gon %>
 </head>
 <body>
 

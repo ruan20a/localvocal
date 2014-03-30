@@ -11,6 +11,8 @@ gem 'carrierwave'
 gem 'fog', '~>1.12.1'
 gem 'rails_12factor'
 gem 'mini_magick'
+# passing variables to javascript files
+gem 'gon'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -32,6 +34,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 group :development, :test do
+  gem 'debugger'
   gem "rspec-rails"
   gem "guard-rspec"
   gem "capybara"
@@ -74,4 +77,4 @@ end
 # gem 'capistrano', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+

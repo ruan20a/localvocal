@@ -1,5 +1,11 @@
 Localvocal::Application.routes.draw do
+  resource :vocals
   devise_for :users
+  root 'welcome#index'
+
+  get "/" => 'welcome#index'
+  get "/record" => 'welcome#record'
+  get "/callback" => 'welcome#callback'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

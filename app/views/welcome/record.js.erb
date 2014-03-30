@@ -1,0 +1,90 @@
+SC.initialize({
+  client_id: gon.client_id,
+  redirect_uri: "http://localhost:3000/callback"
+});
+
+
+$(document).ready(function() {
+  //embedded player, need to send in url to play track
+  SC.get('/tracks/142250696', function(track){
+    $('#player').html(track.title + " - " + track.permalink_url)
+    var link = track.permalink_url
+    SC.oEmbed(link, {maxheight: 200}, document.getElementById('player'));
+  });
+
+  //records on click
+  $('#recorderUI.reset').on('click',function(e){
+    e.preventDefault();
+    updateTimer(0);
+    SC.record({
+      start: function(){
+        setRecorderUIState("recording");
+      },
+      progress: function(ms){
+        updateTimer(ms);
+      },
+    });
+  });
+
+  //stops recording on click
+  $('#stop').on("click", function(e){
+    e.preventDefault();
+    setRecorderUIState("recorded");
+    SC.recordStop();
+  })
+
+  // plays back on click, on finish reverts back to "recorded" class
+  $('#play').on("click", function(e){
+    updateTimer(0);
+    setRecorderUIState("playBack");
+    SC.recordPlay({
+      progress: function(ms){
+        updateTimer(ms);
+      }
+    });
+    e.preventDefault();
+  });
+
+  //resets on click if recorded is unsatisfactory
+  $('#reset').on("click", function(e){
+    e.preventDefault();
+    SC.recordStop();
+    setRecorderUIState("reset")
+    updateTimer(0);
+  })
+
+  //upload on click if ready
+  $('#upload').on("click", function(e){
+    setRecorderUIState("uploading");
+
+    SC.connect({
+      connected: function(){
+        $('#uploadStatus').html("Uploading...");
+        SC.recordUpload({
+          track:{
+            title: "myrecord",
+            sharing: "public"
+          }
+        },function(track){
+          $('#uploadStatus').html("Uploaded: <a href='" + track.permalink_url + "'>" + track.permalink_url + "</a>");
+          $('#uploadId').html(track.id)
+          var link = track.permalink_url
+          //save this link to the database
+        });
+      }
+    });
+    e.preventDefault();
+  });
+
+function updateTimer(ms){
+  $("#timer").text(SC.Helper.millisecondsToHMS(ms));
+}
+
+function setRecorderUIState(state){
+  // state can be reset, recording, recorded, playBack, uploading
+  // visibility of buttons is managed via CSS
+  $('#recorderUI').attr("class",state)
+  console.log(state)
+}
+
+});

@@ -17,6 +17,9 @@ ActiveRecord::Schema.define(version: 20140327205002) do
   enable_extension "plpgsql"
 
   create_table "users", force: true do |t|
+    t.string   "name"
+    t.integer  "score",                  default: 0
+    t.string   "ethnicity",              default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -28,8 +31,6 @@ ActiveRecord::Schema.define(version: 20140327205002) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "user_name",              default: "", null: false
-    t.integer  "score",                  default: 0
-    t.string   "ethnicity",              default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
